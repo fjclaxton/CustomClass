@@ -10,6 +10,7 @@ public class RestaurantMenuItem {
    private double retailPrice;
    
    //constructors
+   //default values
    public RestaurantMenuItem() {
       name = "Cheese Burger";
       course = "Entree";
@@ -23,6 +24,16 @@ public class RestaurantMenuItem {
       productionCost = 4.00;
       retailPrice = 9.99;
    }
+   //constructor for name + ingredients + price
+   //helps support the option to have the most simple menu generated. the course will default to entree because 
+   //on a menu only see the name, ingredients and price.
+   public RestaurantMenuItem(String name, ArrayList<String> ingredients, int price) {
+      this.name = name;
+      this.ingredients = ingredients;
+      this.retailPrice = price;
+      
+   }
+   //all values passed
    public RestaurantMenuItem(String name, String course, int timeToPrepare, double productionCost, double retailPrice) {
       this.name = name;
       this.course = course;
@@ -33,27 +44,37 @@ public class RestaurantMenuItem {
    }
    
    //methods
+   //adds ingredient to ingredient list
    public void addIngredient(String i, int cost) {
       ingredients.add(i);
       productionCost += cost;
       retailPrice += (cost * 1.5);
       System.out.println(ingredients);
    }
+   //removes ingredient from ingredient list
+   public void removeIngredient(String remove, int cost) {
+      ingredients.remove(remove);
+      productionCost -= cost;
+      retailPrice -= (cost * 1.5);
+      System.out.println(ingredients);
+   }
+   //increase retail cost
    public void increaseCost(double newCost) {
       retailPrice += newCost;
       System.out.println(retailPrice);
    }
+   //get the cost of item
    public double getCost(){
       return retailPrice;
    }
+   //get the cost margin percent
    public String costMarginPercent() {
       return ((productionCost/retailPrice) * 100) + "%";
    }
+   //change the name and course of the item
    public void changeNameAndCourse(String newName, String newCourse) {
       name = newName;
       course = newCourse;
    }
-   public void removeIngredient(String remove) {
-      ingredients.remove(remove);
-   }
+   
 }
